@@ -1,0 +1,9 @@
+    // "extend là kế thừa 1 layout để tạo giao diện"
+
+//    " "include là nhúng 1 file(bõx head) vào để dùng hàm trong đấy"
+
+//     "module.exports.connect= async () =>{}  : export dạng hàm, khi requỉe cần phải gọi hàm Tên_biến.connect();"
+        `const Product=mongoose.model("Product",productSchema,"web");
+        module.exports = Product;`
+//      export dạng biến, biến requỉe có thể dùng các func của Product,biến requỉe đóng vtro là 1 model 
+// method "at()" dùng dc chỉ số âm, tính từ cuối lên
