@@ -1,5 +1,6 @@
 const express = require('express');//import express
 const methodOverride=require("method-override");
+const path = require('path');
 const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -19,6 +20,7 @@ database.connect();
 app.use(cookieParser('keyboard cat'));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash());
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 app.use((req, res, next) => {
   res.locals.messages = req.flash();
   next();

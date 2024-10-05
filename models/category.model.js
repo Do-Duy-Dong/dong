@@ -1,21 +1,16 @@
+
 const mongoose=require("mongoose");
 const slug=require("mongoose-slug-updater");
 mongoose.plugin(slug);
 
 const productSchema=mongoose.Schema({   
-id:String,
 title: String,
-price: Number,
-quantity: Number,
-total: Number,
-discountPercentage: Number,
-discountedTota: Number,
+parent_id: Number,
 thumbnail: String,
-status:String,
+
 deleted: {
     type:String,
     default:"true"
-    
 },
 position: Number,
 slug:{
@@ -27,5 +22,5 @@ slug:{
     timestamps:true
 });
 
-const Product=mongoose.model("Product",productSchema,"web");
+const Product=mongoose.model("productCategory",productSchema,"category");
 module.exports = Product;

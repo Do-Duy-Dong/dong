@@ -2,6 +2,7 @@ extends ../../layouts//default
 include ../../mixins/filter-status.pug
 include ../../mixins/search.pug
 include ../../mixins/form-change-multi.pug
+include ../../mixins/sort.pug
 block main 
     //- -if (messages.info)
     //-     div (
@@ -19,13 +20,16 @@ block main
         .card-body 
             .row 
                 .col-6
-                    //- button(
-                    //- class="btn btn-sm ml-1 btn-outline-success active"
-                    //- button-status=""
-                    //- ) Tất cả
+                    
                     +filter-status(filter)
                 .col-6 
                     +search(keyword)
+    .card.mb-3 
+        .card-header Danh sách 
+            .card-body
+                .row 
+                    .col-4 
+                        +sort()
     .card.mb-3 
         .card-header Danh sách 
             .card-body

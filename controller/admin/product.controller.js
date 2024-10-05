@@ -27,7 +27,15 @@ module.exports.index=async (req,res)=>{
         },
         totalProduct
     );
-    const product=await Product.find(find).sort({position:"asc"}).limit(objectPage.limitItem).skip(objectPage.skip);
+    let sort={};
+    if(req.query.sortKey&&req.query.sortValue){
+        sort[req.query.sortKey]=req.query.sortValue;
+    }
+    else{
+        sort.position="asc";
+    }  
+    console.log(sort);
+    const product=await Product.find(find).sort(sort).limit(objectPage.limitItem).skip(objectPage.skip);
     res.render("adimn/page/product/index.pug",{
     pageTitle:"Trang san pham",
     products: product,
@@ -44,6 +52,7 @@ module.exports.changeStatus=async (req,res)=>{
     req.flash('info','ALOOOOOOOOOOO');
     res.redirect("back");//vẫn giữ nguyên ở trang hiện tại
 } 
+
 module.exports.changeMulti=async (req,res)=>{
     const type=req.body.type;
     const ids=req.body.ids.split(", ");
@@ -81,6 +90,7 @@ module.exports.create=async(req,res)=>{
         pageTitle: "THem moi san pham"
     });
 }
+
 // viet tool tampermonkey
 module.exports.createPost=async(req,res)=>{
     // console.log(req.file);
@@ -104,6 +114,7 @@ module.exports.createPost=async(req,res)=>{
     await product.save();
     res.redirect(`${systemConfig.prefixedAdmin}/product`);    
 }
+
 module.exports.edit=async(req,res)=>{
     
     try {
@@ -141,7 +152,6 @@ module.exports.editPatch=async(req,res)=>{
     res.redirect("back");   
 }
 
-
 module.exports.detail=async(req,res)=>{
     
     try {
@@ -159,4 +169,5 @@ module.exports.detail=async(req,res)=>{
         res.redirect(`${systemConfig.prefixedAdmin}/product`);
     }
 }
-// search param, body cua req
+
+// search param, body, query cua req

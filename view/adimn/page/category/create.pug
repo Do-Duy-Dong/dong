@@ -1,0 +1,69 @@
+extends ../../layouts/default.pug   
+
+block main 
+    form(
+        action=`${prefixedAdmin}/category/create`
+        id="form-create-product"
+        method="POST"
+    )
+        div(class="form-group")
+            label(for="title") Tiêu đề
+            input(
+                type="text"
+                id="title"
+                name="title"
+                class="form-control"
+                require 
+
+            )
+        div(class="form-group")
+            label(for="parent_id") Danh mục cha 
+            input(
+                type="text"
+                class="form-control"
+                id="parent_id"
+                name="parent_id"
+                require 
+            )
+        div(class="form-group") Mô tả
+            label(for="description")
+            textarea(
+                class="textarea-mce"
+                id="description"
+                cols="50"
+                rows="5"
+            )
+    
+        div(
+            class="form-group"
+            upload-image
+            )
+            label(for="thumbnail") Anh 
+            input(
+                type="file"
+                class="form-control-file"
+                id="thumbnail"
+                name="thumbnail"
+                accept="image/*"
+                upload-image-input 
+            )   
+            img(
+                src=""
+                upload-image-preview
+            )
+        div(class="form-group")
+                label(for="position")   Vị trí
+                input(
+                    type="number"
+                    class="form-control"
+                    id="position"
+                    name="position"
+                    placeholder="Tự động tăng"
+                    min="1"
+                )
+        
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Cập nhật 

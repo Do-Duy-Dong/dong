@@ -152,7 +152,7 @@ if(formChangeMulti){
             });
         });
     }
-//End delete item
+
 
 //preview upload image
 const uploadImage=document.querySelector("[upload-image]");
@@ -169,5 +169,27 @@ if(uploadImage){
         }
     });
 }
+
+//Sort
+const divSort=document.querySelector("[sort]");
+    if(divSort){
+        let url=new URL(window.location.href);
+        const sortSelect=divSort.querySelector("[sort-select]");
+        sortSelect.addEventListener("change",e=>{
+            const [sortKey,sortValue]=e.target.value.split("-");
+            url.searchParams.set("sortKey",sortKey);
+            url.searchParams.set("sortValue",sortValue);
+           window.location.href=url.href;
+
+        });
+     
+    //Đặt mặc định giá trị thẻ Select đc chọn
+    const sortKey=url.searchParams.get("sortKey");
+    const sortValue=url.searchParams.get("sortValue");
+    if(sortKey&& sortValue){
+    const option=divSort.querySelector(`option[value=${sortKey}-${sortValue}]`);
+    option.selected=true;
+    }
+    }
 // onchange khac gi vs addEvent
 // the input co nhung thuoc tinh gi console log(e)

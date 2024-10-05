@@ -1,0 +1,13 @@
+extends ../../layouts/default.pug   
+
+block main 
+    h1 Danh sách sản phẩm 
+    .card.mb-3
+        .card-header Danh sách 
+            .card-body 
+                .row 
+                    .col-8
+                        a(
+                            href=`${prefixedAdmin}/category/create`
+                            class="btn btn-outline-success"
+                        ) +Thêm
