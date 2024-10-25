@@ -1,0 +1,26 @@
+extends ../../layouts/default.pug
+
+block main 
+    .container.my-3 
+        .row 
+            .col-12 
+                +box-head("Danh sach san pham")
+        if(products.length>0)
+            .row 
+                each item in products
+                    .col-4.mb-3 
+                        .product-item 
+                            .inner-image    
+                                img(
+                                src=item.thumbnail
+                                alt=item.title 
+                                )
+                            .inner-content 
+                                h3.inner-title 
+                                    a(href=`/product/detail/${item.slug}`) #{item.title} 
+                                .inner-price #{item.price.toFixed(2)}
+                                if(item.total)
+                                    .inner-price-old #{item.total.toFixed(2) }
+                                .inner-sale #{item.discountedTotal}
+        else 
+            div Khong tim thay san pham nao

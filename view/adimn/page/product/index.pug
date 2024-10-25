@@ -53,7 +53,9 @@ block main
                             th Hình ảnh
                             th Tiêu đề
                             th Giá
+                            th Vi tri
                             th Trạng thái
+                            th Người tạo
                             th Hành động 
                     
                     tbody 
@@ -99,6 +101,9 @@ block main
                                             data-id=item._id
                                             data-status=item.status
                                             class="btn btn-danger"   ) Dừng hoạt động
+                                    td 
+                                        p #{item.userName}
+                                        
                                     td 
                                         a(
                                             href=`${prefixedAdmin}/product/detail/${item._id}`

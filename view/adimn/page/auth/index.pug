@@ -1,0 +1,30 @@
+extends ../../layouts/auth.pug
+block main 
+    form(
+            action=`${prefixedAdmin}/auth/login`
+            id="form-create-account"
+            method="POST"
+        )
+            div(class="form-group")
+                label(for="Email") Email 
+                input(
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    required 
+                )
+            
+            div(class="form-group")
+                label(for="password")  Password
+                input(
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    name="password"             
+                )
+            div(class="form-group")
+                button(
+                    type="submit"
+                    class="btn btn-primary"
+                ) Đăng nhập 

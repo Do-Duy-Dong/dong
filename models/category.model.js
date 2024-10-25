@@ -3,24 +3,20 @@ const mongoose=require("mongoose");
 const slug=require("mongoose-slug-updater");
 mongoose.plugin(slug);
 
-const productSchema=mongoose.Schema({   
-title: String,
-parent_id: Number,
-thumbnail: String,
+const productSchema=mongoose.Schema({
+    id:String,   
+    title: String,
+    thumbnail: String,
+    parent_id: String,
+    position: Number,
+    slug:{
+        type: String,
+        slug: "title",
+        unique: true
+    }}, 
+    {
+        timestamps:true
+    });
 
-deleted: {
-    type:String,
-    default:"true"
-},
-position: Number,
-slug:{
-    type: String,
-    slug: "title",
-    unique: true
-}}, 
-{
-    timestamps:true
-});
-
-const Product=mongoose.model("productCategory",productSchema,"category");
+const Product=mongoose.model("productCategory",productSchema,"product-category");
 module.exports = Product;

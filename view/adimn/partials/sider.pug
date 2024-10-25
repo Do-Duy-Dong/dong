@@ -1,9 +1,19 @@
 .sider
     .inner-menu 
         ul 
+            
             li 
                 a(href=`${prefixedAdmin}/dashboard`) Tong quan 
+            if(role.permission.includes("products-category_view"))
+                li 
+                    a(href=`${prefixedAdmin}/product`) San pham
+            if(role.permission.includes("product-category_view"))
+                li 
+                    a(href=`${prefixedAdmin}/category`) Danh mục sản phẩm
+            if(role.permission.includes("permission-category_view"))
+                li 
+                    a(href=`${prefixedAdmin}/role`) Nhóm quyền           
             li 
-                a(href=`${prefixedAdmin}/product`) San pham
+                a(href=`${prefixedAdmin}/role/permission`) Phân quyền            
             li 
-                a(href=`${prefixedAdmin}/category`) Danh mục sản phẩm
+                a(href=`${prefixedAdmin}/account`) Danh sách tài khoản

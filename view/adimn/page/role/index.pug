@@ -1,0 +1,29 @@
+extends ../../layouts/default.pug   
+block main 
+    .card.mb-3
+        .card-header Danh sách 
+            .card-body 
+                .row 
+                    .col-8
+                        a(
+                            href=`${prefixedAdmin}/role/create`
+                            class="btn btn-outline-success"
+                        ) +Thêm 
+    .card.mb-3 
+        .card-header Danh sach 
+            .card-body 
+                table(
+                    class="table.table-hover.table-sm"
+                )
+                    thead 
+                        tr 
+                            th STT
+                            th Mo ta
+                            th Hành động 
+                    tbody                        
+                        each item in records
+                            tr
+                                    td #{item.title}   
+                                    td #{item.description}
+                                    td #{item.title}
+                            

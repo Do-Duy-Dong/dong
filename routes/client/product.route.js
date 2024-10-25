@@ -9,9 +9,9 @@ productRouters.get("/create", controller.index);
 
 productRouters.get("/delete", controller.index);
 
-productRouters.get("/copy", controller.index);
+productRouters.get("/:slugCategory", controller.category);
 
-productRouters.get("/:slug",controller.detail);
+productRouters.get("/detail/:slug",controller.detail);
 
 module.exports = productRouters;
 

@@ -1,0 +1,61 @@
+extends ../../layouts/default.pug
+include ../../mixins/createCatogory.pug
+block main 
+    //- #{pageTitle}
+    h1(class="mb-4") Chinh sua san pham 
+    
+    form(
+        action=`${prefixedAdmin}/category/edit/${record._id}?_method=PATCH`
+        id="form-edit-category"
+        method="POST"
+        enctype="multipart/form-data"
+    )
+        div(class="form-group")
+            label(for="title") Tiêu đề
+            input(
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required 
+                value=record.title
+            )
+        div(class="form-group")
+            label(for="parent_id") Danh muc cha 
+            select(
+                id="parent_id"
+                name="parent_id"
+                class="form-group"
+            )
+                option(
+                    value=""
+                ) --Danh muc cha--
+                if(records)
+                    +tree(records)
+
+        div(class="form-group")
+            label(for="descrip") Mo ta
+            textarea(
+                class="textarea-mce"
+                id="description"
+                cols="50"
+                rows="5"
+            )
+        
+        div(class="form-group")
+            label(for="position")   Vị trí
+            input(
+                type="number"
+                class="form-control"
+                id="position"
+                name="position"
+                placeholder="Tự động tăng"
+                min="1"
+                value=record.position 
+            )
+        
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Cập nhật

@@ -1,0 +1,82 @@
+extends ../../layouts/default.pug 
+block main 
+    form(
+        action=`${prefixedAdmin}/account/create`
+        id="form-create-account"
+        method="POST"
+    )
+        div(class="form-group")
+            label(for="fullName") Tên 
+            input(
+                type="text"
+                class="form-control"
+                id="fullName"
+                name="fullName"
+                required 
+            )
+        
+        div(class="form-group")
+            label(for="email")  Email
+            input(
+                type="text"
+                class="form-control"
+                id="email"
+                name="email"
+                
+              
+            )
+        div(class="form-group")
+            label(for="password")  Mật khẩu
+            input(
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                
+            )
+        div(class="form-group")
+            label(for="phone")  SDT
+            input(
+                type="text"
+                class="form-control"
+                id="phone"
+                name="phone"
+                
+            )
+        div(class="form-group" )
+            label(for="role_id")
+            select(
+                class="form-control"
+                name="role_id" 
+                id="role_id"
+            )
+                option(disabled) --Chọn--
+                each item in roles
+                    option(value=item._id) #{item.title} 
+                
+        div(class="form-group form-check form-check-inline")
+                input(
+                    type="radio"
+                    class="form-check-input"
+                    id="statusActive"
+                    name="status"
+                    value="active"
+                    checked 
+                
+                )
+                label(for="statusActive" class="form-check-label") Hoat dong 
+        div(class="form-group form-check form-check-inline")
+            input(
+                type="radio"
+                class="form-check-input"
+                id="statusInActive"
+                name="status"
+                value="inactive"
+                checked 
+            )
+            label(for="statusInActive" class="form-check-label") Dung hoat dong 
+        div(class="form-group")
+            button(
+                type="submit"
+                class="btn btn-primary"
+            ) Tạo mới 

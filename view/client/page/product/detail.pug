@@ -5,3 +5,31 @@ block main
         .row 
             .col-12 
                 h1 Tieu de san pham
+                div 
+                    li Sản phẩm #{product.title}
+                div 
+                    li Giá #{product.price}
+                div 
+                    li Số lượng #{product.quantity}
+                div 
+                    li Vị trí #{product.position}
+                
+                form(
+                    method="POST"
+                    action=`/cart/add/${product._id}`
+                )
+                    input(
+                        name="quantity"
+                        type="number"
+                        class="form-control mb-2"
+                        value="1"
+                        min="1"
+                        max=product.quantity 
+                    )
+                    button(
+                        type="submit"
+                        class="btn btn-success"
+                    ) Thêm vào giỏ hàng
+                div 
+                    if(product.description)
+                        li Mô tả !{product.description}

@@ -18,7 +18,7 @@ block main
                             )
                         .inner-content 
                             h3.inner-title 
-                                a(href=`/product/${item.slug}`) #{item.title} 
+                                a(href=`/product/detail/${item.slug}`) #{item.title} 
                             .inner-price #{item.price.toFixed(2)}
                             if(item.total)
                                 .inner-price-old #{item.total.toFixed(2) }

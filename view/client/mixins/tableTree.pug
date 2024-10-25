@@ -1,0 +1,12 @@
+mixin tableTree(record)
+    each item in record 
+        ul 
+            li 
+                a(href=`/product/${item.slug}`) #{item.title}
+                if(item.children&& item.children.length>0)
+                    +tableTree(item.children)
+    
+    
+    
+    
+    

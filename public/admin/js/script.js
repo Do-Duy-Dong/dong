@@ -161,7 +161,7 @@ if(uploadImage){
     const uploadImagePreview=document.querySelector("[upload-image-preview]");
     
     uploadImageInput.addEventListener("change",e=>{
-        console.log(e);
+        // console.log(e);
         const [file]=uploadImageInput.files;//(e.target.file)//lấy object thứ 0 của file
         console.log(file);
         if(file){

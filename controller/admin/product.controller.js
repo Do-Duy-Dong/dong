@@ -3,6 +3,8 @@ const filterStatusFunction=require("../../func/filterStatus");
 const searchFunction=require("../../func/search.js");
 const paginationFunction=require("../../func/pagination.js");
 const systemConfig=require("../../config/system.js");
+const Acc=require("../../models/account.model.js");
+
 module.exports.index=async (req,res)=>{
     // in ra các nút trạng thái
     const filterStatus=filterStatusFunction(req.query);
@@ -34,8 +36,15 @@ module.exports.index=async (req,res)=>{
     else{
         sort.position="asc";
     }  
-    console.log(sort);
+    
     const product=await Product.find(find).sort(sort).limit(objectPage.limitItem).skip(objectPage.skip);
+    for(const products of product){
+        const user= await Acc.findOne({
+            _id:products.createBy.account_id
+        })
+    if(user){
+        products.userName=user.fullName;
+    }}
     res.render("adimn/page/product/index.pug",{
     pageTitle:"Trang san pham",
     products: product,
@@ -110,7 +119,11 @@ module.exports.createPost=async(req,res)=>{
     if(req.file){
     req.body.thumbnail=`/upload/${req.file.filename}`;
     }
-    const product=new Product(req.body);
+    req.body.createBy= {
+        account_id:res.locals.user.id
+        
+    }
+        const product=new Product(req.body);
     await product.save();
     res.redirect(`${systemConfig.prefixedAdmin}/product`);    
 }
@@ -133,22 +146,31 @@ module.exports.edit=async(req,res)=>{
 }
 
 module.exports.editPatch=async(req,res)=>{
-    console.log(req.body);
+    // console.log(req.body);
     req.body.price=parseInt(req.body.price)
     req.body.discountPercentage=parseInt(req.body.discountPercentage);
     req.body.quantity=parseInt(req.body.quantity);
     req.body.position=parseInt(req.body.position);
-
     if(req.file){
     req.body.thumbnail=`/upload/${req.file.filename}`;
     }
     try{
-    await Product.updateOne({_id:req.params.id},req.body);}
-    //req.flash("thanh cong");
+        const updateAt={
+            account_id: res.locals.user.id,
+            updateAt: new Date()
+        }
+
+    await Product.updateOne({_id:req.params.id},
+        {...req.body,
+        $push: {updateBy: updateAt}
+    });}
+    
+        //req.flash("thanh cong");
     catch(err){
         //req.flash("error","ko thanh cong");
         
     }
+    
     res.redirect("back");   
 }
 

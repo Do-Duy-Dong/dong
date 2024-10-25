@@ -1,5 +1,5 @@
 extends ../../layouts/default.pug   
-
+include ../../mixins/createCatogory.pug
 block main 
     form(
         action=`${prefixedAdmin}/category/create`
@@ -16,15 +16,18 @@ block main
                 require 
 
             )
+        
         div(class="form-group")
-            label(for="parent_id") Danh mục cha 
-            input(
-                type="text"
-                class="form-control"
-                id="parent_id"
+            label(for="parent_id") Danh mục cha
+            select(
+                id="parent-id"
                 name="parent_id"
-                require 
+                class="form-group"
             )
+                option(value="") --Danh mục cha--
+                if(records)
+                    +tree(records)
+
         div(class="form-group") Mô tả
             label(for="description")
             textarea(

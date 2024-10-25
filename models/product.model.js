@@ -8,14 +8,27 @@ title: String,
 price: Number,
 quantity: Number,
 total: Number,
+description: String,
 discountPercentage: Number,
 discountedTota: Number,
 thumbnail: String,
 status:String,
+feature:String,
+createBy:{
+    account_id:String,
+    createdAt:{
+        type:Date,
+        default: Date.now
+    }
+},
 deleted: {
     type:String,
-    default:"true"
+    default:"false"
     
+},
+updateBy:{
+    account_id:String,
+    updateAt: Date
 },
 position: Number,
 slug:{
